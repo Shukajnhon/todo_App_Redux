@@ -1,29 +1,21 @@
-const initState = {
-    filters: {
-        search: '',
-        status: '',
-        priority: []
-    },
-    todoList: [
-        { id: 1, name: 'Learn Yoga', completed: false, priority: 'Medium' },
-        { id: 2, name: 'Learn Redux', completed: true, priority: 'Hight' },
-        { id: 1, name: 'Learn JavaScript', completed: false, priority: 'Low' },
-    ]
-}
+import { combineReducers } from 'redux'
+import filterReducer from '../components/Filters/FiltersSlice'
+import todoListReducer from '../components/TodoList/TodosSlice'
+// console.log(todoListReducer)
 
+// const rootReducer = (state = {}, action) => {
 
+//     return {
+//         filters: filterReducer(state.filters, action),
+//         todoList: todoListReducer(state.todoList, action),
+//     }
+// }
 
-const rootReducer = (state = initState, action) => {
-    switch (action.type) {
-        case 'todoList/addTodo':
-            return {
-                ...state,
-                todoList: [...state, action.payload]
-            }
+// lỗi sau khi dùng combinReducer Todo bị mất render
 
-        default:
-            return state;
-    }
-}
+const rootReducer = combineReducers({
+    filters: filterReducer,
+    todoList: todoListReducer,
+})
 
-export default rootReducer;
+export default rootReducer; 
